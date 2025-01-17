@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sellshop/src/screens/feed/index.dart';
+// import 'package:sellshop/src/widgets/modal/more_bottom.dart';
 
 final List<BottomNavigationBarItem> myTabs=<BottomNavigationBarItem>[
   BottomNavigationBarItem(icon: Icon(Icons.home),label: '홈'),
@@ -8,7 +10,7 @@ final List<BottomNavigationBarItem> myTabs=<BottomNavigationBarItem>[
 ];
 
 final List<Widget> myTabItems=[
-  Center(child: Text('홈'),),
+  const FeedIndex(),
   Center(child: Text('동네'),),
   Center(child: Text('채팅'),),
   Center(child: Text('마이'),),
@@ -32,14 +34,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text('내 동네'),
-        actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-          IconButton(onPressed: (){}, icon: Icon(Icons.notifications_none_rounded))
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
         items: myTabs,
         selectedItemColor: Colors.black,
