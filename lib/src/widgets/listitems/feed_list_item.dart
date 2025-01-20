@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sellshop/src/screens/feed/edit.dart';
+import 'package:get/get.dart';
 
 const double _imageSize=110;
 
 class FeedListItem extends StatelessWidget {
-  const FeedListItem({super.key});
+  final Map item;
+  const FeedListItem(this.item,{super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        // Navigator.push(context, 
+        // MaterialPageRoute(builder: (context)=>FeedEdit(item:item)));
+        Get.to(()=>FeedEdit(item: item));
+      },
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Stack(
@@ -24,7 +31,7 @@ class FeedListItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('판매할 물건의 제목',overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16),),
+                    Text('${item['title']}',overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16),),
                     Row(
                       children: [
                         Text('동네이름',style: TextStyle(color: Colors.grey),),
@@ -32,7 +39,7 @@ class FeedListItem extends StatelessWidget {
                         
                       ],
                     ),
-                    Text('물품 가격',style: TextStyle(fontSize: 16,color: Colors.black),),
+                    Text('${item['price'].toString()}원',style: TextStyle(fontSize: 16,color: Colors.black),),
                   ],
                 ),)),
                 IconButton(onPressed: (){}, icon: const Icon(

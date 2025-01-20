@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sellshop/src/controllers/feed_controller.dart';
 import 'package:sellshop/src/widgets/buttons/category_button.dart';
 import 'package:sellshop/src/widgets/listitems/feed_list_item.dart';
 
@@ -10,9 +12,14 @@ class FeedIndex extends StatefulWidget {
 }
 
 class _FeedIndexState extends State<FeedIndex> {
+  final FeedController feedController = Get.put(FeedController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: feedController.addData,
+        child: const Icon(Icons.add),),
       appBar: AppBar(
         centerTitle: false,
         title: const Text('내 동네'),
@@ -39,17 +46,15 @@ class _FeedIndexState extends State<FeedIndex> {
               ],
             ),
           ),
-          Expanded(child: ListView(
-            children: [
-              FeedListItem(),
-              FeedListItem(),
-              FeedListItem(),
-              FeedListItem(),
-              FeedListItem(),
-              FeedListItem(),
-              FeedListItem(),
-            ],
-          ))
+          Expanded(child: Obx(
+            ()=>ListView.builder(
+              itemCount: feedController.feedList.length,
+              itemBuilder: (context, index) {
+                final item=feedController.feedList[index];
+                return FeedListItem(item);
+              },
+            ))
+          )
         ],
       ),
     );
